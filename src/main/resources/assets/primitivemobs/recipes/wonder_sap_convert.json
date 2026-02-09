@@ -7,8 +7,9 @@
       "data": 32767
     },
     {
-      "item": "minecraft:log",
+      "type": "forge:ore_dict",
       "count": 1,
+      "ore": "logWood",
       "data": 32767
     }
   ],
