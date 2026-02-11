@@ -16,7 +16,7 @@ public class TabPrimitiveMobs extends CreativeTabs {
 	}
 	
 	@Override
-	public ItemStack getTabIconItem() {
+	public ItemStack createIcon() {
 
 		return new ItemStack(PrimitiveMobsItems.CAMOUFLAGE_DYE);
 	}

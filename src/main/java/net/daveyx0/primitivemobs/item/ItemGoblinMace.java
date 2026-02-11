@@ -34,7 +34,7 @@ public class ItemGoblinMace extends ItemSword {
 
 	public static void setItemName(Item item, String itemName) {
 		item.setRegistryName(itemName);
-		item.setUnlocalizedName(item.getRegistryName().toString());
+		item.setTranslationKey(item.getRegistryName().toString());
 	}
 	
 	

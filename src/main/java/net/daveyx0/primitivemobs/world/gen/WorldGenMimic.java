@@ -49,7 +49,7 @@ public class WorldGenMimic implements IWorldGenerator {
 	
     public BlockPos getAboveSolidOrLiquidBlock(World world, BlockPos pos)
     {
-        Chunk chunk = world.getChunkFromBlockCoords(pos);
+        Chunk chunk = world.getChunk(pos);
         BlockPos blockpos = null;
         BlockPos blockpos1;
 
