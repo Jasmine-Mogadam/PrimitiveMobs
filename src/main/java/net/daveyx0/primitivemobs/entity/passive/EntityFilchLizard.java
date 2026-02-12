@@ -6,8 +6,8 @@ import com.google.common.collect.Sets;
 
 import net.daveyx0.multimob.entity.IMultiMobPassive;
 import net.daveyx0.multimob.entity.ai.EntityAIGrabItemFromFloor;
-import net.daveyx0.multimob.entity.ai.EntityAIStealFromPlayer;
 import net.daveyx0.multimob.util.EntityUtil;
+import net.daveyx0.primitivemobs.entity.ai.EntityAIFilchSteal;
 import net.daveyx0.primitivemobs.config.PrimitiveMobsConfigSpecial;
 import net.daveyx0.primitivemobs.core.PrimitiveMobsLootTables;
 import net.minecraft.block.Block;
@@ -57,7 +57,7 @@ public class EntityFilchLizard extends EntityCreature implements IMultiMobPassiv
         this.tasks.addTask(prio++, new EntityAISwimming(this));
         this.tasks.addTask(prio++, new EntityAIPanic(this, 1.25D));
         this.tasks.addTask(prio++, new EntityAIGrabItemFromFloor(this, 1.2D, Sets.newHashSet(stealItems), true));
-        this.tasks.addTask(prio++, new EntityAIStealFromPlayer(this, 0.8D, Sets.newHashSet(stealItems), true));
+        this.tasks.addTask(prio++, new EntityAIFilchSteal(this, 0.8D, Sets.newHashSet(stealItems), true));
         this.tasks.addTask(prio++, new EntityFilchLizard.AIAvoidWhenNasty(this, EntityPlayer.class, 16.0F, 1.0D, 1.33D));
         this.tasks.addTask(prio++, new EntityAIWander(this, 1.0D));
         this.tasks.addTask(prio++, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
