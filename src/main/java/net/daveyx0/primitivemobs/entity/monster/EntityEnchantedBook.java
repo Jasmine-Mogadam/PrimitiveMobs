@@ -1,5 +1,10 @@
 package net.daveyx0.primitivemobs.entity.monster;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import javax.annotation.Nullable;
 
 import net.daveyx0.multimob.entity.IMultiMob;
@@ -18,7 +23,6 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -29,6 +33,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
+import net.daveyx0.primitivemobs.config.PrimitiveMobsConfigSpecial;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
@@ -142,21 +147,39 @@ public class EntityEnchantedBook extends EntityMob implements IMultiMob {
         if (!getEntityWorld().isRemote)
         {
         	int chance = rand.nextInt(2);
-        	
+
         	if(chance == 0)
         	{
-    		Enchantment enchantment = Enchantment.REGISTRY.getRandomObject(getEntityWorld().rand);
+        		String[] configList = PrimitiveMobsConfigSpecial.getBewitchedTomeEnchantmentList();
+        		if (configList == null) configList = new String[]{};
+        		boolean isWhitelist = PrimitiveMobsConfigSpecial.getBewitchedTomeListIsWhitelist();
+        		Set<String> configSet = new HashSet<>(Arrays.asList(configList));
+
+        		List<Enchantment> validEnchantments = new ArrayList<>();
+        		for (Enchantment e : Enchantment.REGISTRY)
+        		{
+        			ResourceLocation key = Enchantment.REGISTRY.getNameForObject(e);
+        			if (key == null) continue;
+        			boolean inList = configSet.contains(key.toString());
+        			if (isWhitelist ? inList : !inList)
+        			{
+        				validEnchantments.add(e);
+        			}
+        		}
+
+        		if (validEnchantments.isEmpty())
+        		{
+        			entityDropItem(new ItemStack(Items.BOOK), 1);
+        			return;
+        		}
+
+        		Enchantment enchantment = validEnchantments.get(rand.nextInt(validEnchantments.size()));
     		int maxPower = enchantment.getMaxLevel();
     		int randomPower = 1 + rand.nextInt(maxPower);
-    		
-    		EntityItem drop = entityDropItem(new ItemStack(Items.ENCHANTED_BOOK), 1);
-        	ItemStack stack = drop.getItem();
-        	if(stack != null && randomPower > 0 && enchantment != null)
-        	{
-        		ItemEnchantedBook book = (ItemEnchantedBook)stack.getItem();
-        		book.addEnchantment(stack, new EnchantmentData(enchantment, randomPower));
-        		stack = new ItemStack(book, 1);
-        	}
+
+    		ItemStack bookStack = new ItemStack(Items.ENCHANTED_BOOK);
+    		ItemEnchantedBook.addEnchantment(bookStack, new EnchantmentData(enchantment, randomPower));
+    		entityDropItem(bookStack, 1);
         	}
         	else
         	{
