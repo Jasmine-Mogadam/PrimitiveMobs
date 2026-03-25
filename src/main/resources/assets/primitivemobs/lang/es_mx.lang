@@ -106,9 +106,9 @@ item.primitivemobs.WitherSkullMinionSpawner.name=Invocador de Craneo de Wither M
 item.primitivemobs.SpiderCaveStructureSpawner.name=Invocador de Arana de Cueva
 item.primitivemobs.GemCaveStructureSpawner.name=Invocador de Gema de Cueva
 item.primitivemobs.CreeperCaveStructureSpawner.name=Invocador de Creeper de Cueva
-item.primitivemobs.GoodWizardTowerStructureSpawner.name=Invocador de Torre de Lagartija Buena
-item.primitivemobs.NeutralWizardTowerStructureSpawner.name=Invocador de Lagartija Neutral
-item.primitivemobs.EvilWizardTowerStructureSpawner.name=Invocador de Lagartija Malvada
+item.primitivemobs.GoodWizardTowerStructureSpawner.name=Invocador de Torre de Mago Buena
+item.primitivemobs.NeutralWizardTowerStructureSpawner.name=Invocador de Mago Neutral
+item.primitivemobs.EvilWizardTowerStructureSpawner.name=Invocador de Mago Malvada
 
 tile.primitivemobs.Tar.name=Alquitran
 tile.primitivemobs.Log.Cinder.name=Tronco de Cinder

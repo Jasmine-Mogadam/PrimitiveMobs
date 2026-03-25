@@ -63,9 +63,9 @@ JER.catagory.primitivemobs.mimic_trap=Mimic Mob Trap Loot
 entity.Villager.primitivemobs.fake_traveling_merchant=Traveling Merchant
 
 #Tamed
-death.tamed.sitting =%1$s is now sitting.
-death.tamed.wandering =%1$s is now wandering.
-death.tamed.following =%1$s is now following.
+death.tamed.sitting=%1$s is now sitting.
+death.tamed.wandering=%1$s is now wandering.
+death.tamed.following=%1$s is now following.
 
 
 #Old

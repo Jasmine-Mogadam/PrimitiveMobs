@@ -24,6 +24,8 @@ public class PrimitiveMobsConfigSpecial {
 	public static boolean groveSpritesPlant;
 	public static int mimicSpawnRate;
 	public static int[] lostMinerLootRange;
+	public static String[] bewitchedTomeEnchantmentList = new String[]{};
+	public static boolean bewitchedTomeListIsWhitelist = false;
 
 	public static void load(Configuration config) {
 		String category1 = "Mob Specific Settings";
@@ -45,6 +47,14 @@ public class PrimitiveMobsConfigSpecial {
 		hauntedToolFullDurability= config.get(category1, "Haunted Tool drop full durability", false, "Enable/Disable if Haunted Tools should drop full durability items.").getBoolean();
 		mimicSpawnRate = config.get(category1, "Spawn Rate of Mimics", 25, "How often a Mimic chest generates. Higher number = rarer. 0 = no mimics chests.").getInt();
 		groveSpritesPlant= config.get(category1, "Grove Sprites plant saplings", true, "Enable/Disable if Grove Sprites should plant sapling they hold.").getBoolean();
+		bewitchedTomeEnchantmentList = config.get(category1, "Bewitched Tome enchantment list", new String[]{},
+				"List of enchantment registry names for the Bewitched Tome drop filter (e.g. minecraft:sharpness, minecraft:fire_aspect). " +
+				"Acts as a blacklist by default. Set 'Bewitched Tome list is whitelist' to true to use as a whitelist instead.")
+				.getStringList();
+		bewitchedTomeListIsWhitelist = config.get(category1, "Bewitched Tome list is whitelist", false,
+				"If true, the Bewitched Tome enchantment list acts as a whitelist (only listed enchantments can drop). " +
+				"If false (default), it acts as a blacklist (listed enchantments are excluded).")
+				.getBoolean();
 	}
 	
 	public static String[] getTreasureSlimeLoot()
@@ -135,5 +145,15 @@ public class PrimitiveMobsConfigSpecial {
 	public static boolean getGroveSpritesPlant()
 	{
 		return groveSpritesPlant;
+	}
+
+	public static String[] getBewitchedTomeEnchantmentList()
+	{
+		return bewitchedTomeEnchantmentList;
+	}
+
+	public static boolean getBewitchedTomeListIsWhitelist()
+	{
+		return bewitchedTomeListIsWhitelist;
 	}
 }

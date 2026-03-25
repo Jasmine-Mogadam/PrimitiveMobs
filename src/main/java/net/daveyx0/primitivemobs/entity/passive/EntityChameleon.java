@@ -6,6 +6,7 @@ import net.daveyx0.multimob.entity.IMultiMob;
 import net.daveyx0.multimob.entity.IMultiMobPassive;
 import net.daveyx0.multimob.util.ColorUtil;
 import net.daveyx0.primitivemobs.core.PrimitiveMobsLootTables;
+import net.daveyx0.primitivemobs.util.TameableUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -171,6 +172,14 @@ public class EntityChameleon extends EntityAnimal implements IMultiMobPassive
 		NewB = (float)RGB[2];
 	}
 
+    /**
+     * Determines if an entity can be despawned, used on idle far away entities
+     */
+    protected boolean canDespawn()
+    {
+        return TameableUtil.canTameableDespawn(this) && super.canDespawn();
+    }
+    
 	public void changeColor(Entity entity)
 	{
 		int i = MathHelper.floor(entity.posX);

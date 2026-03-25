@@ -2,9 +2,18 @@ package net.daveyx0.primitivemobs.entity.monster;
 
 import net.daveyx0.multimob.common.capabilities.CapabilityTameableEntity;
 import net.daveyx0.multimob.common.capabilities.ITameableEntity;
+import net.daveyx0.multimob.entity.ai.EntityAICustomOwnerHurtByTarget;
+import net.daveyx0.multimob.entity.ai.EntityAICustomOwnerHurtTarget;
 import net.daveyx0.multimob.util.EntityUtil;
+import net.daveyx0.primitivemobs.entity.ai.EntityAITamedHurtByTarget;
+import net.daveyx0.primitivemobs.entity.ai.EntityAITamedOwnerHurtByTarget;
+import net.daveyx0.primitivemobs.entity.ai.EntityAITamedOwnerHurtTarget;
+import net.daveyx0.primitivemobs.util.TameableUtil;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAITasks;
 import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -236,6 +245,26 @@ public class EntityPrimitiveCreeper extends EntityCreeper
 		if(tameable != null && tameable.isTamed() && this.isChild())
 		{
 			CapabilityTameableEntity.EventHandler.resetEntityTargetAI(this);
+            java.util.List<EntityAITasks.EntityAITaskEntry> toRemove = new java.util.ArrayList<EntityAITasks.EntityAITaskEntry>();
+            for (EntityAITasks.EntityAITaskEntry entry : this.targetTasks.taskEntries) {
+                if (entry.action instanceof EntityAIHurtByTarget && !(entry.action instanceof EntityAITamedHurtByTarget)) {
+                    toRemove.add(entry);
+                } else if (entry.action instanceof EntityAICustomOwnerHurtByTarget) {
+                    toRemove.add(entry);
+                } else if (entry.action instanceof EntityAICustomOwnerHurtTarget) {
+                    toRemove.add(entry);
+                }
+            }
+            for (EntityAITasks.EntityAITaskEntry entry : toRemove) {
+                this.targetTasks.removeTask(entry.action);
+                if (entry.action instanceof EntityAIHurtByTarget) {
+                    this.targetTasks.addTask(entry.priority, new EntityAITamedHurtByTarget(this, false, new Class[0]));
+                } else if (entry.action instanceof EntityAICustomOwnerHurtByTarget) {
+                    this.targetTasks.addTask(entry.priority, new EntityAITamedOwnerHurtByTarget(this));
+                } else if (entry.action instanceof EntityAICustomOwnerHurtTarget) {
+                    this.targetTasks.addTask(entry.priority, new EntityAITamedOwnerHurtTarget(this));
+                }
+            }
 		}
     }
 
@@ -281,6 +310,19 @@ public class EntityPrimitiveCreeper extends EntityCreeper
     protected final void setScale(float scale)
     {
         super.setSize(this.ageWidth * scale, this.ageHeight * scale);
+    }
+
+    /**
+     * Determines if an entity can be despawned, used on idle far away entities
+     */
+    protected boolean canDespawn()
+    {
+        return TameableUtil.canTameableDespawn(this) && super.canDespawn();
+    }
+    
+    public boolean isPreventingPlayerRest(EntityPlayer playerIn)
+    {
+        return TameableUtil.isTameablePreventingPlayerRest(this) && super.isPreventingPlayerRest(playerIn);
     }
   
 }

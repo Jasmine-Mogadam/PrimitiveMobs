@@ -8,9 +8,11 @@ import net.daveyx0.multimob.common.capabilities.CapabilityTameableEntity;
 import net.daveyx0.multimob.common.capabilities.ITameableEntity;
 import net.daveyx0.multimob.entity.IMultiMob;
 import net.daveyx0.multimob.entity.ai.EntityAICustomFollowOwner;
-import net.daveyx0.multimob.entity.ai.EntityAICustomOwnerHurtByTarget;
-import net.daveyx0.multimob.entity.ai.EntityAICustomOwnerHurtTarget;
 import net.daveyx0.multimob.util.EntityUtil;
+import net.daveyx0.primitivemobs.entity.ai.EntityAITamedHurtByTarget;
+import net.daveyx0.primitivemobs.entity.ai.EntityAITamedOwnerHurtByTarget;
+import net.daveyx0.primitivemobs.entity.ai.EntityAITamedOwnerHurtTarget;
+import net.daveyx0.primitivemobs.util.TameableUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -105,9 +107,9 @@ public class EntityBabySpider extends EntityPrimitiveSpider implements IMultiMob
         this.tasks.addTask(6, new EntityAICustomFollowOwner(this, 1.0D, 8.0F, 2.0F));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(7, new EntityAILookIdle(this));
-        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
-        this.targetTasks.addTask(2, new EntityAICustomOwnerHurtByTarget(this));
-        this.targetTasks.addTask(3, new EntityAICustomOwnerHurtTarget(this));
+        this.targetTasks.addTask(1, new EntityAITamedHurtByTarget(this, false, new Class[0]));
+        this.targetTasks.addTask(2, new EntityAITamedOwnerHurtByTarget(this));
+        this.targetTasks.addTask(3, new EntityAITamedOwnerHurtTarget(this));
     }
     
 
@@ -393,6 +395,19 @@ public class EntityBabySpider extends EntityPrimitiveSpider implements IMultiMob
     public boolean getIsJumping()
     {
 		return ((Boolean)this.dataManager.get(IS_JUMPING)).booleanValue();
+    }
+    
+    /**
+     * Determines if an entity can be despawned, used on idle far away entities
+     */
+    protected boolean canDespawn()
+    {
+        return TameableUtil.canTameableDespawn(this) && super.canDespawn();
+    }
+    
+    public boolean isPreventingPlayerRest(EntityPlayer playerIn)
+    {
+        return TameableUtil.isTameablePreventingPlayerRest(this) && super.isPreventingPlayerRest(playerIn);
     }
     
     /**
