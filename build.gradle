@@ -10,9 +10,12 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
-version = "1.1.3beta"
+def baseVersion = "1.1.3beta"
+def githubRunNumber = System.getenv("GITHUB_RUN_NUMBER")
+
+version = githubRunNumber ? "${baseVersion}-build.${githubRunNumber}" : baseVersion
 group = "net.daveyx0.primitivemobs" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "primitivemobs"
+archivesBaseName = "primitivemobswondersapped"
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 
