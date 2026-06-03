@@ -3,6 +3,7 @@ package net.daveyx0.primitivemobs;
 import com.mojang.logging.LogUtils;
 import net.daveyx0.primitivemobs.content.ModItems;
 import net.daveyx0.primitivemobs.content.dodo.DodoContent;
+import net.daveyx0.primitivemobs.content.skeletonwarrior.SkeletonWarriorContent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -21,5 +22,6 @@ public final class PrimitiveMobsMod {
         // client) so this list is the only shared touch-point when adding mobs.
         ModItems.register(modBus);
         DodoContent.register(modBus);
+        SkeletonWarriorContent.register(modBus);
     }
 }
