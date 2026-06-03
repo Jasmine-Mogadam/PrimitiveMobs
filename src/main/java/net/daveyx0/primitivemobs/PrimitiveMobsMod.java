@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import net.daveyx0.primitivemobs.content.ModItems;
 import net.daveyx0.primitivemobs.content.chameleon.ChameleonContent;
 import net.daveyx0.primitivemobs.content.dodo.DodoContent;
+import net.daveyx0.primitivemobs.content.goblin.GoblinContent;
 import net.daveyx0.primitivemobs.content.skeletonwarrior.SkeletonWarriorContent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -25,5 +26,6 @@ public final class PrimitiveMobsMod {
         DodoContent.register(modBus);
         ChameleonContent.register(modBus);
         SkeletonWarriorContent.register(modBus);
+        GoblinContent.register(modBus);
     }
 }

@@ -9,5 +9,8 @@
   "entity.primitivemobs.chameleon": "Chameleon",
   "item.primitivemobs.chameleon_spawn_egg": "Chameleon Spawn Egg",
   "entity.primitivemobs.skeleton_warrior": "Skeleton Warrior",
-  "item.primitivemobs.skeleton_warrior_spawn_egg": "Skeleton Warrior Spawn Egg"
+  "item.primitivemobs.skeleton_warrior_spawn_egg": "Skeleton Warrior Spawn Egg",
+  "entity.primitivemobs.goblin": "Goblin",
+  "item.primitivemobs.goblin_mace": "Goblin Mace",
+  "item.primitivemobs.goblin_spawn_egg": "Goblin Spawn Egg"
 }
