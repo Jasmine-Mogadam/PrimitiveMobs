@@ -15,8 +15,7 @@ import net.minecraft.resources.ResourceLocation;
  * blending). The tint is applied through {@link ChameleonModel#setTint}.
  */
 public final class ChameleonRenderer extends MobRenderer<Chameleon, ChameleonModel> {
-    private static final ResourceLocation TEXTURE =
-        ResourceLocation.fromNamespaceAndPath(PrimitiveMobsMod.MOD_ID, "textures/entity/chameleon/chameleon.png");
+    private static final ResourceLocation TEXTURE = PrimitiveMobsMod.id("textures/entity/chameleon/chameleon.png");
 
     public ChameleonRenderer(EntityRendererProvider.Context context) {
         super(context, new ChameleonModel(context.bakeLayer(ChameleonModel.LAYER_LOCATION)), 0.4F);

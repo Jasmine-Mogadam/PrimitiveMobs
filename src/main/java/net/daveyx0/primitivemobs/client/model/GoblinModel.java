@@ -11,7 +11,6 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 /**
@@ -23,7 +22,7 @@ import net.minecraft.util.Mth;
  */
 public class GoblinModel extends HumanoidModel<Goblin> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-        ResourceLocation.fromNamespaceAndPath(PrimitiveMobsMod.MOD_ID, "goblin"),
+        PrimitiveMobsMod.id("goblin"),
         "main"
     );
 

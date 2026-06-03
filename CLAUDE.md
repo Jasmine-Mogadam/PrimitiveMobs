@@ -4,44 +4,63 @@
 
 You are in the `PrimitiveMobs-1.20.1` worktree (branch `mc/1.20.1`) — the **active** 1.20.1 Forge port. This is the only place to write code.
 
-Done so far (builds green):
+Done so far (builds green): Dodo, Chameleon, Skeleton Warrior, Goblin (+ misc
+items `wonder_sap`, `mimic_orb` in `content/ModItems.java`).
 - Modern Forge bootstrap: `build.gradle` (ForgeGradle 6, Forge 1.20.1-47.4.10, Java 17, Gradle 8.8), `settings.gradle`, templated `META-INF/mods.toml` + `pack.mcmeta`. Jar archive name: `primitivemobswondersapped`.
-- Misc items in `content/ModItems.java`: `wonder_sap`, `mimic_orb`.
 - **Dodo = the reference module. Copy `content/dodo/` for every new mob.**
 
 ### Per-mob module pattern (IMPORTANT — follow exactly)
 
 Each mob is a **self-contained module** so mobs can be added in parallel without
-touching shared registry files. For a mob named `Foo`:
+touching shared registry files. Use `registry/RegistryHelper` — it removes the
+DeferredRegister/event-listener boilerplate. For a mob named `Foo`:
 
-- `content/foo/FooContent.java` — owns its own `DeferredRegister<Item>` and
-  `DeferredRegister<EntityType<?>>`, the `EntityType` RegistryObject, any
-  mob-specific items (spawn egg, drops), and a `static register(IEventBus modBus)`
-  that registers them and adds listeners for attributes
-  (`EntityAttributeCreationEvent`), creative tabs (`BuildCreativeModeTabContentsEvent`),
-  and spawn placement (in `FMLCommonSetupEvent.enqueueWork`). **Never** register
+- `content/foo/FooContent.java` — holds a `private static final RegistryHelper REG = new RegistryHelper();`
+  and declares its `EntityType`, spawn egg and any items via `REG.entity(...)`,
+  `REG.spawnEgg(...)`, `REG.item(...)`. Its `static register(IEventBus modBus)` calls
+  `REG.register(modBus)` then `RegistryHelper.attributes(...)`,
+  `RegistryHelper.spawnPlacement(...)`, `RegistryHelper.creativeTab(...)`. The helper
+  registers spawn placement in `FMLCommonSetupEvent` for you. **Never** register
   spawn placement or call `.get()` in the mod constructor — it runs before
   registration and NPEs at launch.
 - `content/foo/FooClient.java` — `@Mod.EventBusSubscriber(... value = Dist.CLIENT)`
   static class registering the entity renderer + layer definition. Auto-discovered;
   no central wiring needed.
-- `entity/<group>/Foo.java` — the entity (extend the nearest vanilla mob).
-- `client/model/FooModel.java`, `client/renderer/entity/FooRenderer.java`.
+- `entity/<group>/Foo.java` — the entity (extend the nearest vanilla mob, or a
+  shared `entity/<group>/` base class when several mobs share behavior — see below).
+- `client/model/FooModel.java`, `client/renderer/entity/FooRenderer.java`. Use
+  `PrimitiveMobsMod.id("path")` for ResourceLocations instead of
+  `ResourceLocation.fromNamespaceAndPath(MOD_ID, "path")`.
 - Assets: `assets/primitivemobs/textures/entity/...`, `models/item/foo_spawn_egg.json`
   (and any item models), `lang/en_us.json` entries.
 - Data: `data/primitivemobs/loot_tables/entities/foo.json`, and for spawns a
   `data/primitivemobs/forge/biome_modifier/add_foo_spawns.json`.
 
-The **only** shared file you edit: add one line to `PrimitiveMobsMod` —
+The **only** shared files you edit: add one line to `PrimitiveMobsMod` —
 `FooContent.register(modBus);` — and your `en_us.json` entries. Everything else is
 new files unique to your mob. Read `content/dodo/DodoContent.java`,
 `DodoClient.java` and `entity/passive/Dodo.java` as the canonical example.
 
-~33 mobs remain unported. The full 1.12 implementation lives on the `mc/1.12`
+### Reuse shared logic — don't duplicate (DRY/SOLID)
+
+The per-mob *module* is about registration independence, NOT about copy-pasting
+behavior. Genuinely shared **logic** must be factored, written once:
+- **Shared AI goals** → reusable `Goal` subclasses under `entity/ai/` (e.g. the 1.12
+  `EntityAITemptItemStack`, `EntityAISwitchBetweenRangedAndMelee`, the tameable/follow
+  goals). Many mobs reuse these; do not reimplement per mob.
+- **Shared base mobs** → when several 1.12 mobs extend a custom base for real shared
+  behavior, **port the base class first and extend it** — do NOT flatten it into each
+  subclass. Known families: `EntityPrimitiveCreeper` → festive/rocket/support creepers;
+  `EntityPrimitiveSpider`/`EntityPrimitiveTameableMob` → baby/mother spiders;
+  the slime family (`EntityTameableSlime` → treasure/brain); the villager-based mobs
+  (lost miner / sheepman / traveling merchant); MultiMob flying
+  (`EntityMMFlyingMob`/`Creature` → harpy / void eye); MultiMob swimming → lily lurker.
+  Port the base in its own slice, then build subclasses on it.
+- **Shared variant/color** → one reusable helper (synced `EntityDataAccessor`), not
+  reinvented per mob.
+
+~29 mobs remain unported. The full 1.12 implementation lives on the `mc/1.12`
 branch / `../PrimitiveMobs-1.12` worktree — **read-only reference**, do not edit it.
-Some 1.12 mobs share custom base classes (e.g. `EntityPrimitiveCreeper`,
-`EntityPrimitiveSpider`, slimes, villagers) — port those base mobs before their
-subclasses, or flatten the shared behavior into each subclass.
 
 ## MultiMob: absorb per-mob (do NOT port it as a separate mod)
 
@@ -57,7 +76,7 @@ Strategy for this port:
 
 1. Pick one mob. Read its 1.12 source under `../PrimitiveMobs-1.12/src/main/java/net/daveyx0/primitivemobs/entity/` (and any MultiMob bits it uses) as a **behavior spec**, not code to copy verbatim.
 2. Copy the `content/dodo/` module shape (see the per-mob module pattern above). Write the entity extending the nearest vanilla mob; reimplement AI/behavior with native 1.20.1 goals.
-3. Create `<Mob>Content` (registries, attributes, creative tab, spawn placement) and `<Mob>Client` (renderer + layer). Add a spawn-egg item if it had one.
+3. Create `<Mob>Content` using `RegistryHelper` (registries, attributes, creative tab, spawn placement) and `<Mob>Client` (renderer + layer). Add a spawn-egg item if it had one. Factor any shared AI goal into `entity/ai/` rather than duplicating it.
 4. Add renderer + model; reuse the 1.12 texture/sound assets when compatible (copy the `.png` from the 1.12 worktree).
 5. Add loot table, lang entries, spawn (biome modifier + `SpawnPlacements` in common setup).
 6. Wire in: add one line `<Mob>Content.register(modBus);` to `PrimitiveMobsMod`.
