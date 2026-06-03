@@ -1,5 +1,42 @@
 # PrimitiveMobs Agent Notes
 
+## Current State (read first)
+
+You are in the `PrimitiveMobs-1.20.1` worktree (branch `mc/1.20.1`) — the **active** 1.20.1 Forge port. This is the only place to write code.
+
+Done so far (commit "Modern Forge 1.20.1 bootstrap + Dodo vertical slice", builds green):
+- Modern Forge bootstrap: `build.gradle` (ForgeGradle 6, Forge 1.20.1-47.4.10, Java 17, Gradle 8.8), `settings.gradle`, templated `META-INF/mods.toml` + `pack.mcmeta`. Jar archive name: `primitivemobswondersapped`.
+- `DeferredRegister` registries: `registry/PrimitiveMobsItems.java`, `registry/PrimitiveMobsEntityTypes.java`.
+- Items: `wonder_sap`, `dodo` (raw), `cooked_dodo`, `dodo_egg`, `mimic_orb`, `dodo_spawn_egg`.
+- **Dodo** = the reference vertical slice. Copy its shape for every other mob: `entity/passive/Dodo.java` (extends vanilla `Chicken`), `client/renderer/entity/DodoRenderer.java`, `client/model/DodoModel.java`, `client/PrimitiveMobsClientEvents.java` (renderer + layer registration), texture under `assets/.../textures/entity/`, loot at `data/.../loot_tables/entities/dodo.json`, attributes in `registry/PrimitiveMobsEntityTypes#registerAttributes`, spawn via `data/.../forge/biome_modifier/` + `SpawnPlacements.register` in `PrimitiveMobsMod`.
+
+~43 mobs remain unported. The full 1.12 implementation lives on the `mc/1.12` branch / `../PrimitiveMobs-1.12` worktree — **read-only reference**, do not edit it.
+
+## MultiMob: absorb per-mob (do NOT port it as a separate mod)
+
+The original 1.12 PrimitiveMobs depends on the **MultiMob** library mod (`net.daveyx0.multimob`, vendored as `libs/multimob-1.0.5.jar` on the 1.12 branch) in ~51 files — `IMultiMob`, tameable/variant capabilities, custom AI goals, spawn registry, particles, messages. MultiMob source is at `/Users/jazmo/Documents/GitHub/MultiMob` (1.12.2, read-only reference).
+
+Strategy for this port:
+- **Do not** recreate MultiMob as a subproject or compile-time dependency.
+- As each mob is ported, pull in **only** the behavior it needs (AI goals, variant logic), rewritten under the `net.daveyx0.primitivemobs` package against native 1.20.1 APIs.
+- **Drop** MultiMob's infrastructure (capabilities framework, entity/item registries, config GUI, item-model manager) — Forge 1.20.1 + vanilla provide equivalents (`DeferredRegister`, data-driven models, datapack spawns, etc.).
+- Prefer extending the closest vanilla entity (as Dodo extends `Chicken`) over reproducing MultiMob base classes like `EntityMMBird`/`EntityMMJumper`.
+
+## Port-the-next-mob recipe
+
+1. Pick one mob. Read its 1.12 source under `../PrimitiveMobs-1.12/src/main/java/net/daveyx0/primitivemobs/entity/` (and any MultiMob bits it uses) as a **behavior spec**, not code to copy verbatim.
+2. Write the entity under `entity/`, extending the nearest vanilla mob; reimplement AI/behavior with native 1.20.1 goals.
+3. Register the `EntityType` in `PrimitiveMobsEntityTypes`, add attributes, add a spawn-egg item if it had one.
+4. Add renderer + model + client registration (mirror the Dodo files); reuse the 1.12 texture/sound assets when compatible.
+5. Add loot table, lang entries, spawn (biome modifier + `SpawnPlacements`).
+6. Run `./gradlew build` until green, then commit that one slice. **Do not** add a `Co-Authored-By: Claude` trailer.
+
+Reference paths:
+- 1.12 source: `../PrimitiveMobs-1.12/src/main/`
+- MultiMob source: `/Users/jazmo/Documents/GitHub/MultiMob/main/java/`
+
+---
+
 This repository should use one long-lived branch per supported Minecraft major version.
 
 ## Canonical Version Strategy
