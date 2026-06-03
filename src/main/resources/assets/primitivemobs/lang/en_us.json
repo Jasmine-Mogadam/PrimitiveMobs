@@ -5,5 +5,7 @@
   "item.primitivemobs.cooked_dodo": "Cooked Dodo",
   "item.primitivemobs.dodo_egg": "Dodo Egg",
   "item.primitivemobs.mimic_orb": "Mimic Orb",
-  "item.primitivemobs.dodo_spawn_egg": "Dodo Spawn Egg"
+  "item.primitivemobs.dodo_spawn_egg": "Dodo Spawn Egg",
+  "entity.primitivemobs.chameleon": "Chameleon",
+  "item.primitivemobs.chameleon_spawn_egg": "Chameleon Spawn Egg"
 }
