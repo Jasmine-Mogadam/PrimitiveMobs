@@ -1,7 +1,6 @@
 package net.daveyx0.primitivemobs.entity.passive;
 
-import net.daveyx0.primitivemobs.registry.PrimitiveMobsEntityTypes;
-import net.daveyx0.primitivemobs.registry.PrimitiveMobsItems;
+import net.daveyx0.primitivemobs.content.dodo.DodoContent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
@@ -65,7 +64,7 @@ public class Dodo extends Chicken {
 
         if (!this.level().isClientSide && this.isAlive() && !this.isBaby() && !this.isChickenJockey() && --this.eggTime <= 0) {
             this.playSound(SoundEvents.CHICKEN_EGG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
-            this.spawnAtLocation(PrimitiveMobsItems.DODO_EGG.get());
+            this.spawnAtLocation(DodoContent.DODO_EGG.get());
             this.gameEvent(GameEvent.ENTITY_PLACE);
             this.eggTime = this.random.nextInt(10000) + 10000;
         }
@@ -85,7 +84,7 @@ public class Dodo extends Chicken {
 
     @Override
     public @Nullable Dodo getBreedOffspring(ServerLevel level, AgeableMob otherParent) {
-        return PrimitiveMobsEntityTypes.DODO.get().create(level);
+        return DodoContent.DODO.get().create(level);
     }
 
     @Override
