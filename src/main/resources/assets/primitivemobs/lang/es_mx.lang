@@ -33,7 +33,6 @@ item.primitivemobs:dodo.name=Carne de Dodo
 item.primitivemobs:cooked_dodo.name=Carne de Dodo Cocinada
 item.primitivemobs:dodo_egg.name=Huevo de Dodo
 item.primitivemobs:mimic_orb.name=Orbe Mimico
-item.primitivemobs:summoner_orb.name=Orbe Invocador
 item.primitivemobs:wonder_sap.name=Savia Maravilla
 item.primitivemobs:spider_egg.name=Huevo de Arana
 item.primitivemobs:mysteryegg1.name=Huevo Misterioso
@@ -64,13 +63,13 @@ JER.catagory.primitivemobs.mimic_trap=Botin de Trampa Mimica
 entity.Villager.primitivemobs.fake_traveling_merchant=Mercader Viajero
 
 #Tamed
-death.tamed.sitting =%1$s se sento.
-death.tamed.wandering =%1$s vaga.
-death.tamed.following =%1$s ahora te sigue.
+death.tamed.sitting=%1$s se sento.
+death.tamed.wandering=%1$s vaga.
+death.tamed.following=%1$s ahora te sigue.
+
 
 #Old
 
-entity.primitivemobs.Sheepman.name=Hombre Oveja
 entity.primitivemobs.Summoner.name=Convocador
 entity.primitivemobs.Minion.name=Craneo Minion
 entity.primitivemobs.SheepmanSmith.name=Hombre Oveja Herrero
@@ -79,7 +78,6 @@ entity.primitivemobs.OreGolem.name=Golem de Mineral
 entity.primitivemobs.BlazeCow.name=Vaca Blaze
 entity.primitivemobs.EnderChicken.name=Pollo del End
 entity.primitivemobs.Sheeper.name=Ovejero
-entity.primitivemobs.Goblin.name=Goblin
 entity.primitivemobs.BewitchedTomeSpecial.name=Mazmorra del Tomo Embrujado
 entity.primitivemobs.Wizard.name=Mago
 
@@ -169,7 +167,7 @@ achievement.primitivemobs.hauntedprecious=Mi Precioso
 achievement.primitivemobs.hauntedprecious.desc=Mata un Pico Precioso Encantado
 achievement.primitivemobs.mimicfake=Jack en una Caja
 achievement.primitivemobs.mimicfake.desc=Encuentra un Cofre Mimico que te ataque
-achievement.primitivemobs.mimicdungeon=No Es Un Cofre Falso
+achievement.primitivemobs.mimicdungeon=Not So Fake Chest
 achievement.primitivemobs.mimicdungeon.desc=Encuentra un Cofre Mimico que este en un Cofre de Mazmorra
 achievement.primitivemobs.treasureslimefriend=Companero Slimy
 achievement.primitivemobs.treasureslimefriend.desc=Consigue tu propia mascota Slime del Tesoro
@@ -177,3 +175,5 @@ achievement.primitivemobs.treasureslimewhite=Colores Combinados
 achievement.primitivemobs.treasureslimewhite.desc=As que tu mascota Slime del Tesoro sea completamente blanca
 achievement.primitivemobs.blazingjugger=Sigueme
 achievement.primitivemobs.blazingjugger.desc=As que un Juggernaut Ardiente se meta al agua
+
+itemGroup.tabPrimitiveMobs=Primitive Mobs

@@ -175,3 +175,5 @@ achievement.primitivemobs.treasureslimewhite=Colors Combined
 achievement.primitivemobs.treasureslimewhite.desc=Make your pet Treasure Slime competely white
 achievement.primitivemobs.blazingjugger=Follow Me
 achievement.primitivemobs.blazingjugger.desc=Slay a Blazing Juggernaut by leading it into water
+
+itemGroup.tabPrimitiveMobs=Primitive Mobs
