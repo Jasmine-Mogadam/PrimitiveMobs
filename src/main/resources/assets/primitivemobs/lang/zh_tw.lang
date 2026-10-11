@@ -20,6 +20,11 @@ entity.primitivemobs.lost_miner.name=迷路礦工
 entity.primitivemobs.traveling_merchant.name=行旅商人
 entity.primitivemobs.dodo.name=渡渡鳥
 entity.primitivemobs.mimic.name=模仿箱
+entity.primitivemobs.goblin.name=Goblin
+entity.primitivemobs.flame_spewer.name=Flame Spewer
+entity.primitivemobs.harpy.name=Harpy
+entity.primitivemobs.sheepman.name=Sheepman
+entity.primitivemobs.void_eye.name=Void Eye
 
 #Items
 
@@ -28,7 +33,13 @@ item.primitivemobs:dodo.name=生渡渡鳥肉
 item.primitivemobs:cooked_dodo.name=熟渡渡鳥肉
 item.primitivemobs:dodo_egg.name=渡渡鳥蛋
 item.primitivemobs:mimic_orb.name=模仿箱寶珠
-item.primitivemobs:summoner_orb.name=召喚寶珠
+item.primitivemobs:wonder_sap.name=Wonder Sap
+item.primitivemobs:spider_egg.name=Spider Egg
+item.primitivemobs:mysteryegg1.name=Mystery Egg
+item.primitivemobs:mysteryegg2.name=Mystery Egg
+item.primitivemobs:mysteryegg3.name=Mystery Egg
+item.primitivemobs:spider_eggshell.name=Spider Egg Shell
+item.primitivemobs:goblin_mace.name=Goblin Mace
 
 #Armor
 
@@ -42,15 +53,23 @@ entity.Villager.primitivemobs.ore_miner=礦物礦工
 entity.Villager.primitivemobs.gem_miner=寶石礦工
 entity.Villager.primitivemobs.stone_miner=石材礦工
 entity.Villager.primitivemobs.traveling_merchant=行旅商人
+entity.Villager.primitivemobs.sheepman_scavenger=Sheepman Scavenger
+entity.Villager.primitivemobs.sheepman_alchemist=Sheepman Alchemist
+entity.Villager.primitivemobs.sheepman_thief=Sheepman Thief
 
 #JER Integration
 JER.catagory.primitivemobs.mimic_treasure=模仿箱寶物掉落
 JER.catagory.primitivemobs.mimic_trap=模仿箱怪物陷阱掉落
 entity.Villager.primitivemobs.fake_traveling_merchant=行旅商人
 
+#Tamed
+death.tamed.sitting=%1$s is now sitting.
+death.tamed.wandering=%1$s is now wandering.
+death.tamed.following=%1$s is now following.
+
+
 #Old
 
-entity.primitivemobs.Sheepman.name=羊人
 entity.primitivemobs.Summoner.name=召喚師
 entity.primitivemobs.Minion.name=骷髏從者
 entity.primitivemobs.SheepmanSmith.name=羊人鐵匠
@@ -59,7 +78,6 @@ entity.primitivemobs.OreGolem.name=礦物魔像
 entity.primitivemobs.BlazeCow.name=烈焰牛
 entity.primitivemobs.EnderChicken.name=終界雞
 entity.primitivemobs.Sheeper.name=Sheeper
-entity.primitivemobs.Goblin.name=哥布林
 entity.primitivemobs.BewitchedTomeSpecial.name=被施法的地牢之書
 entity.primitivemobs.Wizard.name=巫師
 
@@ -105,7 +123,7 @@ tile.primitivemobs.Chest.Gem.name=寶石箱
 tile.primitivemobs.BookcaseSpawner.name=被施法的書刷怪蛋
 tile.primitivemobs.Chest.RandomMimic.name=箱子
 tile.primitivemobs.Chest.EvilMimic.name=邪惡模仿箱
-tile.primitivemobs.Chest.SkeletonWarriorMimic.name骷髏戰士模仿箱
+tile.primitivemobs.Chest.SkeletonWarriorMimic.name=骷髏戰士模仿箱
 tile.primitivemobs.Chest.HauntedToolMimic.name=鬧鬼的工具模仿箱
 tile.primitivemobs.Chest.BatMimic.name=蝙蝠模仿箱
 tile.primitivemobs.Chest.ZombieMimic.name=僵屍模仿箱
@@ -115,6 +133,7 @@ tile.primitivemobs.Chest.Creeper.name=苦力怕箱
 
 key.primitivemobs.category=原始生物
 key.primitivemobs.desc=開啟偽裝
+
 enchantment.primitivemobs.stickyFeet=雙腳黏著
 enchantment.primitivemobs.explosiveSlash=爆裂砍擊
 
@@ -156,3 +175,5 @@ achievement.primitivemobs.treasureslimewhite=色彩結合
 achievement.primitivemobs.treasureslimewhite.desc=讓你的寵物寶藏史萊姆完全變白
 achievement.primitivemobs.blazingjugger=跟著我
 achievement.primitivemobs.blazingjugger.desc=引誘烈焰大塊頭到水裡以殺死他
+
+itemGroup.tabPrimitiveMobs=Primitive Mobs

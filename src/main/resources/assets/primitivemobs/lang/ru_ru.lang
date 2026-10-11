@@ -62,7 +62,7 @@ JER.catagory.primitivemobs.mimic_treasure=Добыча c подражателя
 JER.catagory.primitivemobs.mimic_trap=Добыча ловушки подражателя
 entity.Villager.primitivemobs.fake_traveling_merchant=Странствующий торговец
 
-#Tamed (Doesn't seem working) 
+#Tamed
 death.tamed.sitting=%1$s теперь сидит.
 death.tamed.wandering=%1$s теперь блуждает.
 death.tamed.following=%1$s теперь следует за вами.
@@ -175,3 +175,5 @@ achievement.primitivemobs.treasureslimewhite=Сочетание цветов
 achievement.primitivemobs.treasureslimewhite.desc=Сделайте вашего Слизня-сокровищницу полностью белым
 achievement.primitivemobs.blazingjugger=Следуй за мной
 achievement.primitivemobs.blazingjugger.desc=Одолейте ифрита-джаггернаута отведя его в воду
+
+itemGroup.tabPrimitiveMobs=Primitive Mobs

@@ -20,6 +20,11 @@ entity.primitivemobs.lost_miner.name=迷走する炭坑夫
 entity.primitivemobs.traveling_merchant.name=旅する商人
 entity.primitivemobs.dodo.name=ドードー
 entity.primitivemobs.mimic.name=ミミック
+entity.primitivemobs.goblin.name=Goblin
+entity.primitivemobs.flame_spewer.name=Flame Spewer
+entity.primitivemobs.harpy.name=Harpy
+entity.primitivemobs.sheepman.name=Sheepman
+entity.primitivemobs.void_eye.name=Void Eye
 
 #Items
 
@@ -28,7 +33,13 @@ item.primitivemobs:dodo.name=生のドードー肉
 item.primitivemobs:cooked_dodo.name=焼いたドードー肉
 item.primitivemobs:dodo_egg.name=ドードーの卵
 item.primitivemobs:mimic_orb.name=ミミックの宝珠
-item.primitivemobs:summoner_orb.name=召喚の宝珠
+item.primitivemobs:wonder_sap.name=Wonder Sap
+item.primitivemobs:spider_egg.name=Spider Egg
+item.primitivemobs:mysteryegg1.name=Mystery Egg
+item.primitivemobs:mysteryegg2.name=Mystery Egg
+item.primitivemobs:mysteryegg3.name=Mystery Egg
+item.primitivemobs:spider_eggshell.name=Spider Egg Shell
+item.primitivemobs:goblin_mace.name=Goblin Mace
 
 #Armor
 
@@ -42,15 +53,23 @@ entity.Villager.primitivemobs.ore_miner=宝珠の炭坑夫
 entity.Villager.primitivemobs.gem_miner=宝石の炭坑夫
 entity.Villager.primitivemobs.stone_miner=岩石の炭鉱夫
 entity.Villager.primitivemobs.traveling_merchant=旅する商人
+entity.Villager.primitivemobs.sheepman_scavenger=Sheepman Scavenger
+entity.Villager.primitivemobs.sheepman_alchemist=Sheepman Alchemist
+entity.Villager.primitivemobs.sheepman_thief=Sheepman Thief
 
 #JER Integration
 JER.catagory.primitivemobs.mimic_treasure=Mimic Treasure Loot
 JER.catagory.primitivemobs.mimic_trap=Mimic Mob Trap Loot
 entity.Villager.primitivemobs.fake_traveling_merchant=旅する商人
 
+#Tamed
+death.tamed.sitting=%1$s is now sitting.
+death.tamed.wandering=%1$s is now wandering.
+death.tamed.following=%1$s is now following.
+
+
 #Old
 
-entity.primitivemobs.Sheepman.name=ヒツジ人間
 entity.primitivemobs.Summoner.name=召喚師
 entity.primitivemobs.Minion.name=従者スケルトン
 entity.primitivemobs.SheepmanSmith.name=鍛冶屋のヒツジ人間
@@ -59,7 +78,6 @@ entity.primitivemobs.OreGolem.name=鉱石ゴーレム
 entity.primitivemobs.BlazeCow.name=ブレイズ牛
 entity.primitivemobs.EnderChicken.name=エンダー鶏
 entity.primitivemobs.Sheeper.name=Sheeper
-entity.primitivemobs.Goblin.name=ゴブリン
 entity.primitivemobs.BewitchedTomeSpecial.name=魔法をかけられた本のダンジョン
 entity.primitivemobs.Wizard.name=ウイザード
 
@@ -100,7 +118,7 @@ tile.primitivemobs.Decorative.WebbedStone.name=網だらけの石
 tile.primitivemobs.Planks.Cinder.name=木材の燃え殻
 tile.primitivemobs.Stairs.Cinder.name=階段の燃え殻
 tile.primitivemobs.Slab.Cinder.name=木材のハーフブロックの燃え殻
-tile.primitivemobs.Chest.Spider.name網だらけの箱
+tile.primitivemobs.Chest.Spider.name=網だらけの箱
 tile.primitivemobs.Chest.Gem.name=宝石の箱
 tile.primitivemobs.BookcaseSpawner.name=魔法をかけられた本のスポナー
 tile.primitivemobs.Chest.RandomMimic.name=チェスト
@@ -157,3 +175,5 @@ achievement.primitivemobs.treasureslimewhite=色彩融合
 achievement.primitivemobs.treasureslimewhite.desc=君の宝スライム（ペット）を真っ白にさせる
 achievement.primitivemobs.blazingjugger=俺について行け
 achievement.primitivemobs.blazingjugger.desc=ブレイズジャガーノートを水の中まで誘って倒す
+
+itemGroup.tabPrimitiveMobs=Primitive Mobs
